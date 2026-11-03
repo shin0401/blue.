@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>공익법 교육·중개 | 공익인권법재단 공감</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7FAFB; --surface:#FFFFFF; --ink:#14232B; --muted:#52646C;
+  --forest:#277A3E; --forest-soft:#E4F3F9; --sun:#3DAEE0; --line:#CFE0E6;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F171B; --surface:#16222A; --ink:#E6EEF1; --muted:#98AAB2;
+    --forest:#6CCB82; --forest-soft:#17282F; --sun:#5CC3EE; --line:#2A3B44;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F171B; --surface:#16222A; --ink:#E6EEF1; --muted:#98AAB2;
+  --forest:#6CCB82; --forest-soft:#17282F; --sun:#5CC3EE; --line:#2A3B44;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{
+  --sh-1:0 1px 2px rgba(20,35,43,.06),0 4px 12px rgba(20,35,43,.07);
+  --sh-2:0 2px 4px rgba(20,35,43,.06),0 14px 30px rgba(39,122,62,.16);
+  --hi:inset 0 1px 0 rgba(255,255,255,.7);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --sh-1:0 1px 2px rgba(0,0,0,.45),0 6px 16px rgba(0,0,0,.35);
+    --sh-2:0 2px 4px rgba(0,0,0,.45),0 18px 36px rgba(0,0,0,.55);
+    --hi:inset 0 1px 0 rgba(255,255,255,.06);
+  }
+}
+:root[data-theme="dark"]{
+  --sh-1:0 1px 2px rgba(0,0,0,.45),0 6px 16px rgba(0,0,0,.35);
+  --sh-2:0 2px 4px rgba(0,0,0,.45),0 18px 36px rgba(0,0,0,.55);
+  --hi:inset 0 1px 0 rgba(255,255,255,.06);
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:17px;line-height:1.75;word-break:keep-all}
+h1,h2,h3{font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:800;line-height:1.35;letter-spacing:-0.02em;margin:0}
+a{color:var(--forest)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+img,svg{max-width:100%}
+
+/* top bar */
+.bar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-size:15px}
+.bar strong{font-weight:800;font-size:18px}
+.bar a{text-decoration:none;color:var(--muted)}
+.bar a:hover{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:48px 0 72px}
+.hero h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-0.01em}
+.hero p{color:var(--muted);max-width:30em;margin:24px 0 0}
+.hero .area{display:inline-block;font-size:15px;color:var(--forest);margin-bottom:18px;font-weight:600}
+.map{width:100%;height:auto}
+.map .link{stroke:var(--line);stroke-width:2;fill:none;transition:stroke .25s}
+.map .link.on{stroke:var(--sun);stroke-width:3}
+.map .hub{fill:var(--forest)}
+.map .hub-t{fill:var(--paper);font-family:"Noto Sans KR",sans-serif;font-size:22px;font-weight:800}
+.map .node{cursor:pointer}
+.map .node circle{fill:var(--surface);stroke:var(--forest);stroke-width:2;transition:fill .25s}
+.map .node.on circle{fill:var(--sun);stroke:var(--sun)}
+.map .node text{fill:var(--ink);font-size:15px;font-family:"Noto Sans KR",sans-serif;font-weight:500}
+.map .node.on text.lbl{font-weight:600}
+.map .node:focus{outline:none}
+.map .node:focus-visible circle{stroke:var(--sun);stroke-width:4}
+
+/* path panel */
+.paths{background:var(--forest-soft);border-radius:20px;padding:36px;margin-bottom:96px;box-shadow:var(--hi),var(--sh-1)}
+.paths h2{font-size:24px;margin-bottom:6px}
+.paths .hint{color:var(--muted);font-size:15px;margin:0 0 20px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tabs button{font:inherit;font-size:15px;border:1.5px solid var(--forest);background:transparent;color:var(--forest);
+  border-radius:999px;padding:8px 18px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--forest);color:var(--paper);box-shadow:0 4px 10px rgba(39,122,62,.3)}
+.panel{background:var(--surface);border-radius:14px;padding:26px 28px;box-shadow:var(--hi),var(--sh-2);border-top:4px solid var(--sun)}
+.panel h3{font-size:20px;margin-bottom:10px}
+.panel p{margin:0 0 12px;max-width:42em}
+.panel ul{margin:0;padding-left:1.2em;max-width:42em}
+.panel li{margin-bottom:6px}
+
+/* sections */
+section{margin-bottom:96px}
+section > h2{font-size:clamp(26px,3vw,34px);margin-bottom:16px}
+.lead{color:var(--muted);max-width:38em;margin:0 0 40px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.two h3{font-size:22px;margin-bottom:10px;padding-top:16px;border-top:3px solid var(--forest)}
+.two p{margin:0}
+
+.prog{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-bottom-width:3px;border-radius:14px;padding:28px;box-shadow:var(--hi),var(--sh-1);transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-4px);box-shadow:var(--hi),var(--sh-2)}
+.card.wide{grid-column:1 / -1;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;border-left:6px solid var(--sun)}
+.card h3{font-size:21px;margin-bottom:8px}
+.card .who{font-size:14px;color:var(--forest);font-weight:600;margin:0 0 10px}
+.card p{margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.firms{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding:0;list-style:none}
+.firms li{font-size:14px;border:1px solid var(--line);border-radius:6px;padding:4px 10px;color:var(--muted)}
+
+.news{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.news li{background:var(--surface);border:1px solid var(--line);border-bottom-width:3px;border-radius:12px;box-shadow:var(--hi),var(--sh-1);transition:transform .2s ease,box-shadow .2s ease}
+.news li:hover{transform:translateY(-3px);box-shadow:var(--hi),var(--sh-2)}
+.news a{display:flex;justify-content:space-between;gap:16px;padding:18px 22px;text-decoration:none;color:var(--ink)}
+.news a:hover .t{text-decoration:underline}
+.news time{color:var(--muted);font-size:15px;white-space:nowrap}
+
+.contact{background:var(--forest);color:var(--paper);border-radius:20px;padding:48px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),var(--sh-2)}
+.contact h2{font-size:clamp(26px,3vw,34px);margin-bottom:14px}
+.contact p{margin:0 0 20px;opacity:.9}
+.contact dl{margin:0;font-size:15px}
+.contact dt{opacity:.75;margin-top:14px}
+.contact dd{margin:2px 0 0}
+.btn{display:inline-block;background:var(--sun);color:#14232B;box-shadow:0 4px 0 rgba(0,0,0,.18),0 8px 18px rgba(0,0,0,.18);text-decoration:none;font-weight:600;border-radius:999px;padding:12px 26px}
+.btn:hover{filter:brightness(1.05)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .contact{color:#111816}}
+:root[data-theme="dark"] .contact{color:#111816}
+
+footer{color:var(--muted);font-size:14px;padding:40px 0 56px}
+
+@media (max-width:820px){
+  .hero,.two,.contact,.card.wide{grid-template-columns:1fr}
+  .prog{grid-template-columns:1fr}
+  .hero{padding-top:24px;gap:24px}
+  .paths,.contact{padding:28px 22px}
+  section{margin-bottom:72px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <strong>공감</strong>
+    <a href="https://www.kpil.org" target="_blank" rel="noopener">kpil.org 홈페이지</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <span class="area">공익법 교육·중개</span>
+      <h1>법을 배우는 사람과<br>법이 필요한 곳을<br>잇습니다</h1>
+      <p>공감은 예비법조인과 법조인이 공익법 활동을 경험하고 이어갈 수 있도록 교육 프로그램을 만들고, 로펌·법조인과 공익단체를 연결합니다.</p>
+    </div>
+    <svg class="map" viewBox="0 0 440 400" role="group" aria-label="공감이 세 그룹을 잇는 구조. 그룹을 선택하면 참여 방법이 아래에 표시됩니다.">
+      <path class="link" data-k="student" d="M220 200 Q140 140 90 80"/>
+      <path class="link" data-k="lawyer" d="M220 200 Q320 150 360 90"/>
+      <path class="link" data-k="ngo" d="M220 200 Q230 290 220 340"/>
+      <circle class="hub" cx="220" cy="200" r="48"/>
+      <text class="hub-t" x="220" y="208" text-anchor="middle">공감</text>
+      <g class="node" data-k="student" tabindex="0" role="button" aria-label="예비법조인·학생">
+        <circle cx="90" cy="80" r="26"/>
+        <text class="lbl" x="90" y="34" text-anchor="middle">예비법조인·학생</text>
+      </g>
+      <g class="node" data-k="lawyer" tabindex="0" role="button" aria-label="법조인·로펌">
+        <circle cx="360" cy="90" r="26"/>
+        <text class="lbl" x="360" y="44" text-anchor="middle">법조인·로펌</text>
+      </g>
+      <g class="node" data-k="ngo" tabindex="0" role="button" aria-label="공익단체">
+        <circle cx="220" cy="340" r="26"/>
+        <text class="lbl" x="220" y="390" text-anchor="middle">공익단체</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="paths" id="paths">
+    <h2>어디서 함께하시나요?</h2>
+    <p class="hint">위 그림의 원이나 아래 버튼을 눌러 참여 방법을 확인하세요.</p>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-k="student" aria-selected="true">예비법조인·학생</button>
+      <button role="tab" data-k="lawyer" aria-selected="false">법조인·로펌</button>
+      <button role="tab" data-k="ngo" aria-selected="false">공익단체</button>
+    </div>
+    <div class="panel" role="tabpanel" aria-live="polite"></div>
+  </div>
+
+  <section>
+    <h2>교육과 중개, 두 가지 일을 합니다</h2>
+    <p class="lead">공익법 활동에 관심을 가진 예비법조인은 늘고 있지만, 직접 경험해 볼 기회는 여전히 부족합니다. 공감은 그 간격을 좁히는 프로그램을 만들고 사람과 단체를 이어 공익법 활동이 넓어지도록 돕습니다.</p>
+    <div class="two">
+      <div>
+        <h3>교육</h3>
+        <p>학생과 예비법조인이 인권 현장과 공익소송을 가까이에서 보고 배울 수 있도록 인권법캠프, 인턴십, 로스쿨·사법연수원 특강을 운영합니다.</p>
+      </div>
+      <div>
+        <h3>중개</h3>
+        <p>로펌과 법조인이 공감의 활동에 재정으로 참여하거나 직접 함께하도록 하고, 법률 지원이 필요한 공익단체와 연결해 공익법 활동으로 이어지게 합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>프로그램</h2>
+    <p class="lead">대상과 형식에 따라 아래 프로그램을 운영하고 있습니다. 일정과 모집 공고는 공감 홈페이지에서 확인할 수 있습니다.</p>
+    <div class="prog">
+      <article class="card wide">
+        <div>
+          <p class="who">인권에 관심 있는 성인 누구나</p>
+          <h3>공감 인권법캠프</h3>
+          <p>2008년부터 이어온 공감의 대표 교육 프로그램입니다. 전체 강좌와 국제인권, 노동, 빈곤과 복지, 성소수자 인권 같은 영역별 주제마당, 공감 변호사와의 대화로 하루를 채웁니다.</p>
+        </div>
+        <div>
+          <p>처음에는 사법연수생과 로스쿨 입학 예정자를 위한 2박 3일 캠프로 시작했고, 지금은 인권에 관심 있는 누구나 참여할 수 있는 캠프로 열리고 있습니다. 2024년 2월에 제28회 캠프가 열렸습니다.</p>
+          <p><a href="https://www.kpil.org/board_activity/20240207/" target="_blank" rel="noopener">제28회 캠프 참가 후기 읽기</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <p class="who">대학생·로스쿨생</p>
+        <h3>인턴십·자원활동</h3>
+        <p>2005년부터 학생과 예비법조인이 공감의 공익소송, 법제도 개선, 연구조사 활동에 직접 참여하는 자원활동가·인턴십 제도를 운영해 왔습니다.</p>
+      </article>
+      <article class="card">
+        <p class="who">법학전문대학원·사법연수원</p>
+        <h3>변호사의 공익활동 특강</h3>
+        <p>공감 변호사가 공익변호사 활동의 필요성과 역사, 현황, 공감이 맡아온 공익소송을 소개합니다. 여성, 장애, 이주·난민, 성소수자, 취약노동 등 영역별 주제도 고를 수 있습니다.</p>
+      </article>
+      <article class="card">
+        <p class="who">로펌·법조인</p>
+        <h3>로펌 공익활동 중개</h3>
+        <p>국내 로펌과 파트너십을 맺고, 소속 변호사들이 공익소송과 공익단체 법률지원에 참여하도록 연결합니다.</p>
+        <ul class="firms" aria-label="파트너 로펌 예시">
+          <li>김·장 법률사무소</li><li>법무법인 태평양</li><li>법무법인 충정</li><li>법무법인 지평</li><li>법무법인 한결</li>
+        </ul>
+      </article>
+      <article class="card">
+        <p class="who">공익단체</p>
+        <h3>공익단체 네트워크</h3>
+        <p>법률 지원이 필요한 공익단체와 네트워크를 만들고, 참여를 원하는 법조인과 로펌을 연결해 필요한 곳에 법률 전문성이 닿도록 합니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>활동 소식</h2>
+    <ul class="news">
+      <li><a href="https://www.kpil.org/board_activity/20240207/" target="_blank" rel="noopener"><span class="t">제28회 공감 인권법캠프 참가 후기</span><time datetime="2024-02-07">2024. 2. 7.</time></a></li>
+      <li><a href="https://www.kpil.org/board_activity/20090305/" target="_blank" rel="noopener"><span class="t">[공익법 중개] 39기 사법연수생 변호사실무수습 강의</span><time datetime="2009-03-05">2009. 3. 5.</time></a></li>
+    </ul>
+  </section>
+
+  <section class="contact">
+    <div>
+      <h2>특강 요청, 파트너십, 참여 문의</h2>
+      <p>프로그램 일정과 모집 공고, 특강·파트너십 문의 방법은 공감 홈페이지에서 확인하세요.</p>
+      <a class="btn" href="https://www.kpil.org" target="_blank" rel="noopener">공감 홈페이지 방문하기</a>
+    </div>
+    <dl>
+      <dt>담당</dt><dd>신옥미 (공익법 교육·중개, 운영)<br>조미연 변호사 (공익법 교육·중개)</dd>
+      <dt>주소</dt><dd>서울 종로구 창덕궁길 29-6<br>북촌창우극장 3층</dd>
+    </dl>
+  </section>
+
+  <footer>공익인권법재단 공감 · 공익법 교육·중개 영역 랜딩페이지 시안. 내용은 공개된 자료를 바탕으로 정리했으며, 최신 정보는 kpil.org에서 확인하세요.</footer>
+</div>
+
+<script>
+const content={
+  student:{t:"예비법조인·학생이라면",p:"공익변호사의 일을 가까이에서 경험하고, 인권 현장에서 법이 어떻게 쓰이는지 배울 수 있습니다.",
+    l:["인권법캠프에 참가해 영역별 강의를 듣고 공감 변호사와 이야기 나누기","인턴십·자원활동가로 공익소송과 연구조사에 참여하기","재학 중인 로스쿨에 공감 변호사 특강 요청하기"]},
+  lawyer:{t:"법조인·로펌이라면",p:"공감의 중개를 통해 소속 변호사의 공익활동을 시작하거나 넓힐 수 있습니다.",
+    l:["파트너십을 맺고 공익소송·공익단체 법률지원에 참여하기","공감의 공익법 활동을 재정으로 후원하기","법률 지원이 필요한 공익단체와 연결되기"]},
+  ngo:{t:"공익단체라면",p:"단체 활동에 필요한 법률 전문성을 공감의 네트워크를 통해 구할 수 있습니다.",
+    l:["공감 네트워크에 연결해 법률 지원이 필요한 사안 알리기","참여 의사가 있는 법조인·로펌과 연계되기","단체 활동가를 위한 법률교육 문의하기"]}
+};
+const panel=document.querySelector('.panel');
+const tabs=[...document.querySelectorAll('.tabs button')];
+const nodes=[...document.querySelectorAll('.map .node')];
+const links=[...document.querySelectorAll('.map .link')];
+function show(k,scroll){
+  const c=content[k];
+  panel.innerHTML=`<h3>${c.t}</h3><p>${c.p}</p><ul>${c.l.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
+  nodes.forEach(n=>n.classList.toggle('on',n.dataset.k===k));
+  links.forEach(n=>n.classList.toggle('on',n.dataset.k===k));
+  if(scroll&&window.innerWidth<820)document.getElementById('paths').scrollIntoView({behavior:'smooth'});
+}
+tabs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));
+nodes.forEach(n=>{
+  n.addEventListener('click',()=>show(n.dataset.k,true));
+  n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(n.dataset.k,true)}});
+});
+show('student');
+</script>
+</body>
+</html>
